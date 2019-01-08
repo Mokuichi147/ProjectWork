@@ -16,17 +16,18 @@
 #define L  2
 #define ZL 3
 
-/* sensor */
+/* センサー */
 #define S_Start PORTAbits.RA4
 
-/* motor */
-// turn right  ->  M_R = false, M_L = true
+/* モーター */
+// 右へ曲がる  ->  M_R = false, M_L = true
 #define M_R PORTBbits.RB7
 #define M_L PORTBbits.RB4
 
 #define M_RB PORTBbits.RB6
 #define M_LB PORTBbits.RB5
 
+/* モーターを動かす為の関数 */
 void turn_left (int N, int M)
 {
 	M_L = false;
@@ -71,6 +72,7 @@ void forward_turn (int N, int M, int T)
 		__delay_us(100);
 	}
 }
+
 
 void main (void)
 {
