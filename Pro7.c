@@ -84,6 +84,12 @@ void main (void)
 	
 	int Last = -1;
 
+	int newest;
+	int one_ago = 0;
+	int two_ago = 0;
+
+	int now;
+
 	/* スタートボタン */
 	while (S_Start || !Start)
 		Start = S_Start;
@@ -91,8 +97,15 @@ void main (void)
 	/* ライントレース */
 	while (!Goal)
 	{
+		// 最新のセンサーの値を取得する
+		newest = ~PORTA & 0b1111;
+
+		now = newest & one_ago;
+		now |= newest & two_ago;
+		now |= one_ago & two_ago;
+
 		/* 1 -> line */
-		switch (~PORTA & 0b1111)
+		switch (now)
 		{
 			case 0b0110:
 				// 本体の真ん中にライン -> 直進
@@ -222,6 +235,9 @@ void main (void)
 				/* 危険な値なのでpass */
 				__delay_us(50);
 				break;
+
+			two_ago = one_ago;
+			one_ago = newest;
 		}
 	}
 }
