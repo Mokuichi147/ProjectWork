@@ -68,13 +68,13 @@ void forward (int ON, int TOTAL)
 
 void forward_turn (int L_ON, int R_ON, int TOTAL)
 {
-	M_L = M_R = false;
+	M_L = M_R = true;
 	for (int i=0; i<TOTAL; i++)
 	{
 		if (i == L_ON)
-			M_L = true;
+			M_L = false;
 		if (i == R_ON)
-			M_R = true;
+			M_R = false;
 		__delay_us(time_us);
 	}
 }
@@ -96,7 +96,7 @@ void main (void)
 	int newest;
 	int one_ago = 0;
 	int two_ago = 0;
-	
+
 	int now;
 
 	/* スタートボタン */
@@ -150,14 +150,22 @@ void main (void)
 				switch (Last)
 				{
 					case ZL:
+						/*
+							|
+							|??
+						*/
 						// 左側にあるラインに近づいている -> 少し右に曲がる
-						forward_turn(5, 8, 10);
+						forward_turn(8, 5, 10);
 						break;
 
 					case R:
 					case ZR:
+						/*
+							 |
+							??|
+						*/
 						// 右側にあるラインに近づいている -> 少し左に曲がる
-						forward_turn(8, 5, 10);
+						forward_turn(5, 8, 10);
 						break;
 
 					default:
@@ -174,11 +182,19 @@ void main (void)
 				{
 					case ZL:
 					case L:
+						/*
+							|
+							|??
+						*/
 						// 左側にあるラインに近づいている -> 少し右に曲がる
 						forward_turn(5, 8, 10);
 						break;
 
 					case ZR:
+						/*
+							 |
+							??|
+						*/
 						// 右側にあるラインに近づいている -> 少し左に曲がる
 						forward_turn(8, 5, 10);
 						break;
@@ -202,11 +218,19 @@ void main (void)
 						break;
 
 					case L:
+						/*
+							|
+							|??
+						*/
 						// 左側にあるラインから離れている -> 少し左に曲がる
 						forward_turn(8, 5, 10);
 						break;
 
 					case R:
+						/*
+							 |
+							??|
+						*/
 						// 右側にあるラインから離れている -> 少し右に曲がる
 						forward_turn(5, 8, 10);
 						break;
