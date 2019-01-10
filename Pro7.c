@@ -16,6 +16,9 @@
 #define L  2
 #define ZL 3
 
+/* __delay_usの時間 */
+#define time_us 100
+
 /* センサー */
 #define S_Start PORTAbits.RA4
 
@@ -28,48 +31,51 @@
 #define M_LB PORTBbits.RB5
 
 /* モーターを動かす為の関数 */
-void turn_left (int N, int M)
+void turn_left (int ON, int TOTAL)
 {
 	M_L = false;
 	M_R = true;
-	for (int i=0; i<N; i++)
-		__delay_us(100);
-	M_R = false;
-	for (int i=0; i<M; i++)
-		__delay_us(100);
+	for (int i=0; i<TOTAL; i++)
+	{
+		if (i == ON)
+			M_R = false;
+		__delay_us(time_us);
+	}
 }
 
-void turn_right (int N, int M)
+void turn_right (int ON, int TOTAL)
 {
 	M_L = true;
 	M_R = false;
-	for (int i=0; i<N; i++)
-		__delay_us(100);
-	M_L = false;
-	for (int i=0; i<M; i++)
-		__delay_us(100);
-}
-
-void forward (int N, int M)
-{
-	for (int i=0; i<N; i++)
-		__delay_us(100);
-	M_L = M_R = false;
-	for (int i=0; i<M; i++)
-		__delay_us(100);
-	M_L = M_R = true;
-}
-
-void forward_turn (int N, int M, int T)
-{
-	M_L = M_R = false;
-	for (int i=0; i<T; i++)
+	for (int i=0; i<TOTAL; i++)
 	{
-		if (i==N)
+		if (i == ON)
+			M_L = false;
+		__delay_us(time_us);
+	}
+}
+
+void forward (int ON, int TOTAL)
+{
+	M_L = M_R = true;
+	for (int i=0; i<TOTAL; i++)
+	{
+		if (i == ON)
+			M_L = M_R = false;
+		__delay_us(time_us);
+	}
+}
+
+void forward_turn (int L_ON, int R_ON, int TOTAL)
+{
+	M_L = M_R = false;
+	for (int i=0; i<TOTAL; i++)
+	{
+		if (i == L_ON)
 			M_L = true;
-		if (i==M)
+		if (i == R_ON)
 			M_R = true;
-		__delay_us(100);
+		__delay_us(time_us);
 	}
 }
 
@@ -84,12 +90,13 @@ void main (void)
 	int Start = false;
 	int Goal = false;
 	
+	// 前回の結果を保持する
 	int Last = -1;
 
 	int newest;
 	int one_ago = 0;
 	int two_ago = 0;
-
+	
 	int now;
 
 	/* スタートボタン */
@@ -111,7 +118,7 @@ void main (void)
 		{
 			case 0b0110:
 				// 本体の真ん中にライン -> 直進
-				forward(7, 3);
+				forward(7, 10);
 				break;
 			
 			case 0b1110:
@@ -121,7 +128,7 @@ void main (void)
 				M_L = M_LB = true;
 				__delay_us(2);
 				M_L = M_LB = false;
-				turn_left(6, 4);
+				turn_left(6, 10);
 				//forward_turn(9, 4, 10);
 				Last = ZL;
 				break;
@@ -133,7 +140,7 @@ void main (void)
 				M_R = M_RB = true;
 				__delay_us(2);
 				M_R = M_RB = false;
-				turn_right(6, 4);
+				turn_right(6, 10);
 				//forward_turn(4, 9, 10);
 				Last = ZR;
 				break;
@@ -155,7 +162,7 @@ void main (void)
 
 					default:
 						// スタートの可能性がある -> 直進
-						forward(7, 3);
+						forward(7, 10);
 						Last = L;
 						break;
 				}
@@ -178,7 +185,7 @@ void main (void)
 					
 					default:
 						// スタートの可能性がある -> 直進
-						forward(7, 3);
+						forward(7, 10);
 						Last = R;
 						break;
 				}
@@ -190,7 +197,7 @@ void main (void)
 				{
 					case ZL:
 						// 左側にライン -> 左に曲がる
-						turn_left(6, 4);
+						turn_left(6, 10);
 						//forward_turn(9, 4, 10);
 						break;
 
@@ -206,13 +213,13 @@ void main (void)
 
 					case ZR:
 						// 右側にライン -> 右に曲がる
-						turn_right(6, 4);
+						turn_right(6, 10);
 						//forward_turn(4, 9, 10);
 						break;
 
 					default:
 						// スタートの可能性がある -> 直進
-						forward(7, 3);
+						forward(7, 10);
 						break;
 				}
 				break;
@@ -223,7 +230,7 @@ void main (void)
 				{
 					case -1:
 						// スタート -> 直進
-						forward(7, 3);
+						forward(7, 10);
 						break;
 					
 					default:
