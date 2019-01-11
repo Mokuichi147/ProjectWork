@@ -114,7 +114,7 @@ void main (void)
 		now |= one_ago & two_ago;
 
 		/* 1 -> line */
-		switch (now)
+		switch (newest)
 		{
 			case 0b0110:
 				// 本体の真ん中にライン -> 直進
