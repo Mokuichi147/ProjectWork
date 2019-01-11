@@ -118,7 +118,7 @@ void main (void)
 		{
 			case 0b0110:
 				// 本体の真ん中にライン -> 直進
-				forward(7, 10);
+				forward(6, 10);
 				break;
 			
 			case 0b1110:
@@ -126,9 +126,9 @@ void main (void)
 			case 0b1000:
 				// 左側にライン -> 左に曲がる
 				M_L = M_LB = true;
-				__delay_us(2);
+				__delay_us(100);
 				M_L = M_LB = false;
-				turn_left(6, 10);
+				turn_left(5, 10);
 				//forward_turn(9, 4, 10);
 				Last = ZL;
 				break;
@@ -138,9 +138,9 @@ void main (void)
 			case 0b0001:
 				// 右側にライン -> 右に曲がる
 				M_R = M_RB = true;
-				__delay_us(2);
+				__delay_us(100);
 				M_R = M_RB = false;
-				turn_right(6, 10);
+				turn_right(5, 10);
 				//forward_turn(4, 9, 10);
 				Last = ZR;
 				break;
@@ -155,7 +155,7 @@ void main (void)
 							|\
 						*/
 						// 左側にあるラインに近づいている -> 少し右に曲がる
-						forward_turn(8, 5, 10);
+						forward_turn(7, 4, 10);
 						break;
 
 					case R:
@@ -165,12 +165,12 @@ void main (void)
 							/|
 						*/
 						// 右側にあるラインに近づいている -> 少し左に曲がる
-						forward_turn(5, 8, 10);
+						forward_turn(4, 7, 10);
 						break;
 
 					default:
 						// スタートの可能性がある -> 直進
-						forward(7, 10);
+						forward(6, 10);
 						Last = L;
 						break;
 				}
@@ -187,7 +187,7 @@ void main (void)
 							|\
 						*/
 						// 左側にあるラインに近づいている -> 少し右に曲がる
-						forward_turn(5, 8, 10);
+						forward_turn(4, 7, 10);
 						break;
 
 					case ZR:
@@ -196,12 +196,12 @@ void main (void)
 							/|
 						*/
 						// 右側にあるラインに近づいている -> 少し左に曲がる
-						forward_turn(8, 5, 10);
+						forward_turn(7, 4, 10);
 						break;
 					
 					default:
 						// スタートの可能性がある -> 直進
-						forward(7, 10);
+						forward(6, 10);
 						Last = R;
 						break;
 				}
@@ -213,7 +213,7 @@ void main (void)
 				{
 					case ZL:
 						// 左側にライン -> 左に曲がる
-						turn_left(6, 10);
+						turn_left(5, 10);
 						//forward_turn(9, 4, 10);
 						break;
 
@@ -223,7 +223,7 @@ void main (void)
 							|/
 						*/
 						// 左側にあるラインから離れている -> 少し左に曲がる
-						forward_turn(8, 5, 10);
+						forward_turn(7, 4, 10);
 						break;
 
 					case R:
@@ -232,18 +232,18 @@ void main (void)
 							\|
 						*/
 						// 右側にあるラインから離れている -> 少し右に曲がる
-						forward_turn(5, 8, 10);
+						forward_turn(4, 7, 10);
 						break;
 
 					case ZR:
 						// 右側にライン -> 右に曲がる
-						turn_right(6, 10);
+						turn_right(5, 10);
 						//forward_turn(4, 9, 10);
 						break;
 
 					default:
 						// スタートの可能性がある -> 直進
-						forward(7, 10);
+						forward(6, 10);
 						break;
 				}
 				break;
@@ -254,7 +254,7 @@ void main (void)
 				{
 					case -1:
 						// スタート -> 直進
-						forward(7, 10);
+						forward(6, 10);
 						break;
 					
 					default:
