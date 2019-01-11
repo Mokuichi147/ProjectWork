@@ -19,9 +19,6 @@
 /* __delay_usの時間 */
 #define time_us 100
 
-/* センサー */
-#define S_Start PORTAbits.RA4
-
 /* モーター */
 // 右へ曲がる  ->  M_R = false, M_L = true
 #define M_R PORTBbits.RB7
@@ -66,20 +63,6 @@ void forward (int ON, int TOTAL)
 	}
 }
 
-void forward_turn (int L_ON, int R_ON, int TOTAL)
-{
-	M_L = M_R = true;
-	for (int i=0; i<TOTAL; i++)
-	{
-		if (i == L_ON)
-			M_L = false;
-		if (i == R_ON)
-			M_R = false;
-		__delay_us(time_us);
-	}
-}
-
-
 void main (void)
 {
 	TRISA = 0x1F;
@@ -100,8 +83,8 @@ void main (void)
 	int now;
 
 	/* スタートボタン */
-	while (S_Start || !Start)
-		Start = S_Start;
+	while (PORTAbits.RA4 || !Start)
+		Start = PORTAbits.RA4;
 
 	/* ライントレース */
 	while (!Goal)
@@ -209,16 +192,13 @@ void main (void)
 				{
 					case ZL:
 						// 左側にライン -> 左に曲がる
-						turn_left(8, 10);
-						break;
-
 					case L:
 						/*
 							|
 							|/
 						*/
 						// 左側にあるラインから離れている -> 少し左に曲がる
-						turn_right(8, 10);
+						turn_left(8, 10);
 						break;
 
 					case R:
@@ -227,9 +207,6 @@ void main (void)
 							\|
 						*/
 						// 右側にあるラインから離れている -> 少し右に曲がる
-						turn_left(8, 10);
-						break;
-
 					case ZR:
 						// 右側にライン -> 右に曲がる
 						turn_right(8, 10);
