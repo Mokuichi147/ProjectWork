@@ -126,7 +126,7 @@ void main (void)
 			case 0b1000:
 				// 左側にライン -> 左に曲がる
 				M_L = M_LB = true;
-				__delay_us(100);
+				__delay_us(20);
 				M_L = M_LB = false;
 				turn_left(5, 10);
 				//forward_turn(9, 4, 10);
@@ -138,7 +138,7 @@ void main (void)
 			case 0b0001:
 				// 右側にライン -> 右に曲がる
 				M_R = M_RB = true;
-				__delay_us(100);
+				__delay_us(20);
 				M_R = M_RB = false;
 				turn_right(5, 10);
 				//forward_turn(4, 9, 10);
