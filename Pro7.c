@@ -78,7 +78,6 @@ void main (void)
 
 	int newest;
 	int one_ago = 0;
-	int two_ago = 0;
 
 	int now;
 
