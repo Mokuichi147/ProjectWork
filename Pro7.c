@@ -110,8 +110,6 @@ void main (void)
 		newest = ~PORTA & 0b1111;
 
 		now = newest & one_ago;
-		//now |= newest & two_ago;
-		//now |= one_ago & two_ago;
 
 		/* 1 -> line */
 		switch (now)
@@ -129,7 +127,6 @@ void main (void)
 				__delay_us(20);
 				M_L = M_LB = false;
 				turn_left(7, 10);
-				//forward_turn(9, 4, 10);
 				Last = ZL;
 				break;
 
@@ -141,7 +138,6 @@ void main (void)
 				__delay_us(20);
 				M_R = M_RB = false;
 				turn_right(7, 10);
-				//forward_turn(4, 9, 10);
 				Last = ZR;
 				break;
 
@@ -155,7 +151,6 @@ void main (void)
 							|\
 						*/
 						// 左側にあるラインに近づいている -> 少し右に曲がる
-						//forward_turn(7, 4, 10);
 						turn_right(7, 10);
 						break;
 
@@ -166,7 +161,6 @@ void main (void)
 							/|
 						*/
 						// 右側にあるラインに近づいている -> 少し左に曲がる
-						//forward_turn(4, 7, 10);
 						turn_left(7, 10);
 						break;
 
@@ -189,7 +183,6 @@ void main (void)
 							|\
 						*/
 						// 左側にあるラインに近づいている -> 少し右に曲がる
-						//forward_turn(4, 7, 10);
 						turn_right(7, 10);
 						break;
 
@@ -199,7 +192,6 @@ void main (void)
 							/|
 						*/
 						// 右側にあるラインに近づいている -> 少し左に曲がる
-						//forward_turn(7, 4, 10);
 						turn_left(7, 10);
 						break;
 					
@@ -218,7 +210,6 @@ void main (void)
 					case ZL:
 						// 左側にライン -> 左に曲がる
 						turn_left(7, 10);
-						//forward_turn(9, 4, 10);
 						break;
 
 					case L:
@@ -227,7 +218,6 @@ void main (void)
 							|/
 						*/
 						// 左側にあるラインから離れている -> 少し左に曲がる
-						//forward_turn(7, 4, 10);
 						turn_right(7, 10);
 						break;
 
@@ -237,14 +227,12 @@ void main (void)
 							\|
 						*/
 						// 右側にあるラインから離れている -> 少し右に曲がる
-						//forward_turn(4, 7, 10);
 						turn_left(7, 10);
 						break;
 
 					case ZR:
 						// 右側にライン -> 右に曲がる
 						turn_right(7, 10);
-						//forward_turn(4, 9, 10);
 						break;
 
 					default:
@@ -275,7 +263,6 @@ void main (void)
 				__delay_us(50);
 				break;
 		}
-		two_ago = one_ago;
 		one_ago = newest;
 	}
 }
