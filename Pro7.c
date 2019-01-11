@@ -110,11 +110,11 @@ void main (void)
 		newest = ~PORTA & 0b1111;
 
 		now = newest & one_ago;
-		now |= newest & two_ago;
-		now |= one_ago & two_ago;
+		//now |= newest & two_ago;
+		//now |= one_ago & two_ago;
 
 		/* 1 -> line */
-		switch (newest)
+		switch (now)
 		{
 			case 0b0110:
 				// 本体の真ん中にライン -> 直進
@@ -259,7 +259,7 @@ void main (void)
 					
 					default:
 						// ゴール -> ループ終了
-						Goal = true;
+						//Goal = true;
 						break;
 				}
 				break;
@@ -268,9 +268,8 @@ void main (void)
 				/* 危険な値なのでpass */
 				__delay_us(50);
 				break;
-
-			two_ago = one_ago;
-			one_ago = newest;
 		}
+		two_ago = one_ago;
+		one_ago = newest;
 	}
 }
