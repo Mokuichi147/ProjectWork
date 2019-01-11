@@ -12,7 +12,6 @@ https://opensource.org/licenses/mit-license.php
 ---
 
 ## 環境
-- PIC16F84A
 - モーター 2個
 - 光センサ 4個
 - サーボモータ無し
