@@ -1,8 +1,8 @@
 #include <XC.h>
 #include <pic16f84a.h>
 
-#pragma config FOSC = HS
-#pragma config WDTE = OFF
+#pragma config FOSC  = HS
+#pragma config WDTE  = OFF
 #pragma config PWRTE = ON
 
 #define _XTAL_FREQ 10000000
@@ -19,49 +19,29 @@
 /* __delay_usの時間 */
 #define time_us 100
 
-/* モーター */
-// 右へ曲がる  ->  M_R = false, M_L = true
-#define M_R PORTBbits.RB7
-#define M_L PORTBbits.RB4
-
+/* モーター		例: 右へ曲がる ->  M_R = false, M_L = true */
+#define M_R  PORTBbits.RB7
+#define M_L  PORTBbits.RB4
 #define M_RB PORTBbits.RB6
 #define M_LB PORTBbits.RB5
 
 /* モーターを動かす為の関数 */
-void turn_left (int ON, int TOTAL)
+void turn (int L_ON, int R_ON, int TOTAL)
 {
-	M_L = false;
-	M_R = true;
-	for (int i=0; i<TOTAL; i++)
+	if (L_ON)	M_L = true;
+	if (R_ON)	M_R = true;
+	for (int count=0; count<TOTAL; count++)
 	{
-		if (i == ON)
-			M_R = false;
+		if (count == L_ON)	M_L = false;
+		if (count == R_ON)	M_R = false;
 		__delay_us(time_us);
 	}
 }
 
-void turn_right (int ON, int TOTAL)
-{
-	M_L = true;
-	M_R = false;
-	for (int i=0; i<TOTAL; i++)
-	{
-		if (i == ON)
-			M_L = false;
-		__delay_us(time_us);
-	}
-}
+void turn_left  (int ON_Time, int TOTAL) { turn(      0, ON_Time, TOTAL); }
+void turn_right (int ON_Time, int TOTAL) { turn(ON_Time,       0, TOTAL); }
+void forward    (int ON_Time, int TOTAL) { turn(ON_Time, ON_Time, TOTAL); }
 
-void forward (int ON, int TOTAL)
-{
-	M_L = M_R = true;
-	for (int i=0; i<TOTAL; i++)
-	{
-		if (i == ON)
-			M_L = M_R = false;
-		__delay_us(time_us);
-	}
-}
 
 void main (void)
 {
@@ -71,14 +51,14 @@ void main (void)
 	PORTB = 0x00;
 
 	int Start = false;
-	int Goal = false;
+	int Goal  = false;
 	
 	// 前回の結果を保持する
 	int Last = -1;
 
+	// 誤差を抑える為に使う
 	int newest;
 	int one_ago = 0;
-
 	int now;
 
 	/* スタートボタン */
