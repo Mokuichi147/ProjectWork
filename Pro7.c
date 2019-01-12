@@ -16,14 +16,14 @@
 #define L  2
 #define ZL 3
 
-/* __delay_usの時間 */
-#define time_us 100
-
-/* モーター		例: 右へ曲がる ->  M_R = false, M_L = true */
+// モーター		例: 右へ曲がる ->  M_R = false, M_L = true
 #define M_R  PORTBbits.RB7
 #define M_L  PORTBbits.RB4
 #define M_RB PORTBbits.RB6
 #define M_LB PORTBbits.RB5
+
+// __delay_usの時間
+#define time_us 100
 
 /* モーターを動かす為の関数 */
 void turn (int L_ON, int R_ON, int TOTAL)
@@ -68,11 +68,10 @@ void main (void)
 	/* ライントレース */
 	while (!Goal)
 	{
-		// 最新のセンサーの値を取得する
+		// 最新のセンサーの値を取得し、白を1にする (ラインがあると1)
 		newest = ~PORTA & 0b1111;
 		now = newest & one_ago;
 
-		/* 1 -> line */
 		switch (now)
 		{
 			// 本体の真ん中にライン -> 直進
@@ -102,8 +101,8 @@ void main (void)
 				Last = ZR;
 				break;
 
+			// 前回の結果により変える
 			case 0b0100:
-				/* 前回の結果により変える */
 				switch (Last)
 				{
 					// 左側にあるラインに近づいている ( |\ ) -> 少し右に曲がる
@@ -125,8 +124,8 @@ void main (void)
 				}
 				break;
 			
+			// 前回の結果により変える
 			case 0b0010:
-				/* 前回の結果により変える */
 				switch (Last)
 				{
 					// 左側にあるラインに近づいている ( |\ ) -> 少し右に曲がる
@@ -148,8 +147,8 @@ void main (void)
 				}
 				break;
 			
+			// 前回の結果により変える
 			case 0b0000:
-				/* 前回の結果により変える */
 				switch (Last)
 				{
 					// 左側にライン -> 左に曲がる
@@ -173,8 +172,8 @@ void main (void)
 				}
 				break;
 			
+			// 前回の結果により変える
 			case 0b1111:
-				/* 前回の結果により変える */
 				switch (Last)
 				{
 					// スタート -> 直進
@@ -189,7 +188,7 @@ void main (void)
 				}
 				break;
 
-			/* 危険な値なので慣性で移動 */
+			// 危険な値なので慣性で移動
 			default:
 				__delay_us(50);
 				break;
