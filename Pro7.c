@@ -70,21 +70,20 @@ void main (void)
 	{
 		// 最新のセンサーの値を取得する
 		newest = ~PORTA & 0b1111;
-
 		now = newest & one_ago;
 
 		/* 1 -> line */
 		switch (now)
 		{
+			// 本体の真ん中にライン -> 直進
 			case 0b0110:
-				// 本体の真ん中にライン -> 直進
 				forward(7, 10);
 				break;
 			
+			// 左側にライン -> 左に曲がる
 			case 0b1110:
 			case 0b1100:
 			case 0b1000:
-				// 左側にライン -> 左に曲がる
 				M_L = M_LB = true;
 				__delay_us(20);
 				M_L = M_LB = false;
@@ -92,10 +91,10 @@ void main (void)
 				Last = ZL;
 				break;
 
+			// 右側にライン -> 右に曲がる
 			case 0b0111:
 			case 0b0011:
 			case 0b0001:
-				// 右側にライン -> 右に曲がる
 				M_R = M_RB = true;
 				__delay_us(20);
 				M_R = M_RB = false;
@@ -107,19 +106,19 @@ void main (void)
 				/* 前回の結果により変える */
 				switch (Last)
 				{
+					// 左側にあるラインに近づいている ( |\ ) -> 少し右に曲がる
 					case ZL:
-						// 左側にあるラインに近づいている ( |\ ) -> 少し右に曲がる
 						turn_right(8, 10);
 						break;
 
+					// 右側にあるラインに近づいている ( /| ) -> 少し左に曲がる
 					case R:
 					case ZR:
-						// 右側にあるラインに近づいている ( /| ) -> 少し左に曲がる
 						turn_left(8, 10);
 						break;
 
+					// スタートの可能性がある -> 直進
 					default:
-						// スタートの可能性がある -> 直進
 						forward(7, 10);
 						Last = L;
 						break;
@@ -130,19 +129,19 @@ void main (void)
 				/* 前回の結果により変える */
 				switch (Last)
 				{
+					// 左側にあるラインに近づいている ( |\ ) -> 少し右に曲がる
 					case ZL:
 					case L:
-						// 左側にあるラインに近づいている ( |\ ) -> 少し右に曲がる
 						turn_right(8, 10);
 						break;
 
+					// 右側にあるラインに近づいている ( /| ) -> 少し左に曲がる
 					case ZR:
-						// 右側にあるラインに近づいている ( /| ) -> 少し左に曲がる
 						turn_left(8, 10);
 						break;
 					
+					// スタートの可能性がある -> 直進
 					default:
-						// スタートの可能性がある -> 直進
 						forward(7, 10);
 						Last = R;
 						break;
@@ -153,22 +152,22 @@ void main (void)
 				/* 前回の結果により変える */
 				switch (Last)
 				{
+					// 左側にライン -> 左に曲がる
 					case ZL:
-						// 左側にライン -> 左に曲がる
+					// 左側にあるラインから離れている ( |/ ) -> 少し左に曲がる
 					case L:
-						// 左側にあるラインから離れている ( |/ ) -> 少し左に曲がる
 						turn_left(8, 10);
 						break;
 
-					case R:
-						// 右側にあるラインから離れている ( \| ) -> 少し右に曲がる
+					// 右側にライン -> 右に曲がる
 					case ZR:
-						// 右側にライン -> 右に曲がる
+					// 右側にあるラインから離れている ( \| ) -> 少し右に曲がる
+					case R:
 						turn_right(8, 10);
 						break;
 
+					// スタートの可能性がある -> 直進
 					default:
-						// スタートの可能性がある -> 直進
 						forward(7, 10);
 						break;
 				}
@@ -178,20 +177,20 @@ void main (void)
 				/* 前回の結果により変える */
 				switch (Last)
 				{
+					// スタート -> 直進
 					case -1:
-						// スタート -> 直進
 						forward(7, 10);
 						break;
 					
+					// ゴール -> ループ終了
 					default:
-						// ゴール -> ループ終了
 						//Goal = true;
 						break;
 				}
 				break;
 
+			/* 危険な値なので慣性で移動 */
 			default:
-				/* 危険な値なのでpass */
 				__delay_us(50);
 				break;
 		}
