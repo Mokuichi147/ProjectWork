@@ -23,7 +23,7 @@
 #define M_LB PORTBbits.RB5
 
 // __delay_us‚ÌŠÔ
-#define time_us 100
+#define time_us 1500
 
 /* ƒ‚[ƒ^[‚ğ“®‚©‚·ˆ×‚ÌŠÖ” */
 void turn (int L_ON, int R_ON, int TOTAL)
