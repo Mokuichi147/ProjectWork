@@ -28,12 +28,12 @@
 /* ƒ‚[ƒ^[‚ğ“®‚©‚·ˆ×‚ÌŠÖ” */
 void turn (int L_ON, int R_ON, int TOTAL)
 {
-    if (L_ON)	M_L = true;
-    if (R_ON)	M_R = true;
+    if (L_ON)   M_L = true;
+    if (R_ON)   M_R = true;
     for (int count=0; count<TOTAL; count++)
     {
-        if (count == L_ON)	M_L = false;
-        if (count == R_ON)	M_R = false;
+        if (count == L_ON)  M_L = false;
+        if (count == R_ON)  M_R = false;
         __delay_us(time_us);
     }
 }
