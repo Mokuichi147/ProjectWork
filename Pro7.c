@@ -76,7 +76,7 @@ void main (void)
         {
             // 本体の真ん中にライン -> 直進
             case 0b0110:
-                forward(7, 10);
+                forward(8, 10);
                 break;
             
             // 左側にライン -> 左に曲がる
@@ -118,7 +118,7 @@ void main (void)
 
                     // スタートの可能性がある -> 直進
                     default:
-                        forward(7, 10);
+                        forward(10, 10);
                         Last = L;
                         break;
                 }
@@ -141,7 +141,7 @@ void main (void)
                     
                     // スタートの可能性がある -> 直進
                     default:
-                        forward(7, 10);
+                        forward(10, 10);
                         Last = R;
                         break;
                 }
@@ -167,7 +167,7 @@ void main (void)
 
                     // スタートの可能性がある -> 直進
                     default:
-                        forward(7, 10);
+                        forward(10, 10);
                         break;
                 }
                 break;
@@ -178,7 +178,7 @@ void main (void)
                 {
                     // スタート -> 直進
                     case -1:
-                        forward(7, 10);
+                        forward(10, 10);
                         break;
                     
                     // ゴール -> ループ終了
