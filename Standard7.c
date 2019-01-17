@@ -119,17 +119,11 @@ void main (void)
                     // 左側にあるラインに近づいている ( |\ ) -> 少し右に曲がる
                     case ZL:
                     case R:
-                        M_R = M_RB = true;
-                        __delay_us(20);
-                        M_R = M_RB = false;
                         turn_right(9, 10);
                         break;
 
                     // 右側にあるラインに近づいている ( /| ) -> 少し左に曲がる
                     case ZR:
-                        M_L = M_LB = true;
-                        __delay_us(20);
-                        M_L = M_LB = false;
                         turn_left(9, 10);
                         break;
 
@@ -147,18 +141,12 @@ void main (void)
                 {
                     // 左側にあるラインに近づいている ( |\ ) -> 少し右に曲がる
                     case ZL:
-                        M_R = M_RB = true;
-                        __delay_us(20);
-                        M_R = M_RB = false;
                         turn_right(9, 10);
                         break;
 
                     // 右側にあるラインに近づいている ( /| ) -> 少し左に曲がる
                     case ZR:
                     case L:
-                        M_L = M_LB = true;
-                        __delay_us(20);
-                        M_L = M_LB = false;
                         turn_left(9, 10);
                         break;
                     
@@ -176,27 +164,15 @@ void main (void)
                 {
                     // 左側にライン -> 左に曲がる
                     case ZL:
-                        turn_left(9, 10);
-                        break;
-
                     // 左側にあるラインから離れている ( |/ ) -> 少し左に曲がる
                     case L:
-                        M_L = M_LB = true;
-                        __delay_us(20);
-                        M_L = M_LB = false;
                         turn_left(9, 10);
                         break;
 
                     // 右側にライン -> 右に曲がる
                     case ZR:
-                        turn_right(9, 10);
-                        break;
-                        
                     // 右側にあるラインから離れている ( \| ) -> 少し右に曲がる
                     case R:
-                        M_R = M_RB = true;
-                        __delay_us(20);
-                        M_R = M_RB = false;
                         turn_right(9, 10);
                         break;
 
