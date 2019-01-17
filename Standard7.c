@@ -47,15 +47,13 @@ void main (void)
 {
     TRISA = 0x1F;
     TRISB = 0x00;
-    
     PORTB = 0x00;
 
+    // スタートボタンとゴールのフラグ
     int Start = false;
     int Goal  = false;
-    
     // 前回の結果を保持する
     int Last = -1;
-
     // 誤差を抑える為に使う
     int newest;
     int one_ago = 0;
