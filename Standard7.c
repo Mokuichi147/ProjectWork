@@ -23,7 +23,7 @@
 #define M_LB PORTBbits.RB5
 
 // __delay_usの時間
-#define time_us 100
+#define time_us 1500
 
 /* モーターを動かす為の関数 */
 void turn (int L_ON, int R_ON, int TOTAL)
@@ -119,12 +119,18 @@ void main (void)
                     // 左側にあるラインに近づいている ( |\ ) -> 少し右に曲がる
                     case ZL:
                     case R:
-                        turn_right(8, 10);
+                        M_R = M_RB = true;
+                        __delay_us(20);
+                        M_R = M_RB = false;
+                        turn_right(9, 10);
                         break;
 
                     // 右側にあるラインに近づいている ( /| ) -> 少し左に曲がる
                     case ZR:
-                        turn_left(8, 10);
+                        M_L = M_LB = true;
+                        __delay_us(20);
+                        M_L = M_LB = false;
+                        turn_left(9, 10);
                         break;
 
                     // スタートの可能性がある -> 直進
@@ -141,13 +147,19 @@ void main (void)
                 {
                     // 左側にあるラインに近づいている ( |\ ) -> 少し右に曲がる
                     case ZL:
-                        turn_right(8, 10);
+                        M_R = M_RB = true;
+                        __delay_us(20);
+                        M_R = M_RB = false;
+                        turn_right(9, 10);
                         break;
 
                     // 右側にあるラインに近づいている ( /| ) -> 少し左に曲がる
                     case ZR:
                     case L:
-                        turn_left(8, 10);
+                        M_L = M_LB = true;
+                        __delay_us(20);
+                        M_L = M_LB = false;
+                        turn_left(9, 10);
                         break;
                     
                     // スタートの可能性がある -> 直進
@@ -164,16 +176,28 @@ void main (void)
                 {
                     // 左側にライン -> 左に曲がる
                     case ZL:
+                        turn_left(9, 10);
+                        break;
+
                     // 左側にあるラインから離れている ( |/ ) -> 少し左に曲がる
                     case L:
-                        turn_left(8, 10);
+                        M_L = M_LB = true;
+                        __delay_us(20);
+                        M_L = M_LB = false;
+                        turn_left(9, 10);
                         break;
 
                     // 右側にライン -> 右に曲がる
                     case ZR:
+                        turn_right(9, 10);
+                        break;
+                        
                     // 右側にあるラインから離れている ( \| ) -> 少し右に曲がる
                     case R:
-                        turn_right(8, 10);
+                        M_R = M_RB = true;
+                        __delay_us(20);
+                        M_R = M_RB = false;
+                        turn_right(9, 10);
                         break;
 
                     // スタートの可能性がある -> 直進
