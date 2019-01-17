@@ -86,7 +86,7 @@ void main (void)
                 M_L = M_LB = true;
                 __delay_us(20);
                 M_L = M_LB = false;
-                turn_left(7, 10);
+                turn_left(9, 10);
                 Last = ZL;
                 break;
 
@@ -97,7 +97,7 @@ void main (void)
                 M_R = M_RB = true;
                 __delay_us(20);
                 M_R = M_RB = false;
-                turn_right(7, 10);
+                turn_right(9, 10);
                 Last = ZR;
                 break;
 
@@ -188,9 +188,9 @@ void main (void)
                 }
                 break;
 
-            // ŠëŒ¯‚È’l‚È‚Ì‚ÅŠµ«‚ÅˆÚ“®
+            // ŠëŒ¯‚È’l‚È‚Ì‚Å™s
             default:
-                __delay_us(50);
+                forward(1, 10);
                 break;
         }
         one_ago = newest;
