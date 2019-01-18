@@ -16,7 +16,7 @@
 #define L  2
 #define ZL 3
 
-// モーター		例: 右へ曲がる ->  M_R = false, M_L = true
+// モーター	    例: 右へ曲がる ->  M_R = false, M_L = true
 #define M_R  PORTBbits.RB7
 #define M_L  PORTBbits.RB4
 #define M_RB PORTBbits.RB6
@@ -64,9 +64,9 @@ void TURN (int ZLorZR)
             
             default:
                 if (ZLorZR == ZL)
-					turn_left(10, 10);
+                    turn_left(10, 10);
                 else
-					turn_right(10, 10);
+                    turn_right(10, 10);
                 break;
         }
         Prev = Sensor;
