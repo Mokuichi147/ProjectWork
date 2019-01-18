@@ -69,8 +69,10 @@ void TURN (int ZLorLR)
             case 0b0001:
             case 0b0011:
             case 0b0111:
-                if (ZLorZR == ZL)   turn_left (10, 10);
-                else                turn_right(10, 10);
+                if (ZLorZR == ZL)
+					turn_left(10, 10);
+                else
+					turn_right(10, 10);
                 break;
             
             default:
