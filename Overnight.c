@@ -62,21 +62,11 @@ void TURN (int ZLorLR)
                 Loop = false;
                 break;
             
-            case 0b0000:
-            case 0b1000:
-            case 0b1100:
-            case 0b1110:
-            case 0b0001:
-            case 0b0011:
-            case 0b0111:
+            default:
                 if (ZLorZR == ZL)
 					turn_left(10, 10);
                 else
 					turn_right(10, 10);
-                break;
-            
-            default:
-                __delay_ms(1);
                 break;
         }
         Prev = Sensor;
@@ -135,13 +125,13 @@ void main (void)
             
             // 左側にライン -> 少し左に曲がる
             case 0b0100:
-                PWM(9, 10, 10);
+                PWM(7, 10, 10);
                 Last = L;
                 break;
             
             // 右側にライン -> 少し右に曲がる
             case 0b0010:
-                PWM(10, 9, 10);
+                PWM(10, 7, 10);
                 Last = R;
                 break;
             
@@ -150,11 +140,11 @@ void main (void)
                 switch (Last)
                 {
                     case L:
-                        PWM(7, 10, 10);
+                        PWM(4, 10, 10);
                         break;
                     
                     case R:
-                        PWM(10, 7, 10);
+                        PWM(10, 4, 10);
                         break;
                     
                     default:
