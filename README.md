@@ -1,6 +1,6 @@
 # ProjectWork
 
-<img src="https://github.com/Mokuichi147/ProjectWork/blob/master/line_trace_car.png" width="200">
+<img src="https://github.com/Mokuichi147/ProjectWork/blob/master/line_trace_car.png" width="300">
 
 プロジェクトワークのライントレースプログラムです。  
 このコードを使用する際は、プログラムのコードに以下のような記述をしてください。
