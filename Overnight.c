@@ -42,7 +42,7 @@ void turn_left  (int ON_Time, int TOTAL) { PWM(      0, ON_Time, TOTAL); }
 void turn_right (int ON_Time, int TOTAL) { PWM(ON_Time,       0, TOTAL); }
 void forward    (int ON_Time, int TOTAL) { PWM(ON_Time, ON_Time, TOTAL); }
 
-void TURN (int ZLorLR)
+void TURN (int ZLorZR)
 {
     int Loop = true;
     int Sensor;
