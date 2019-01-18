@@ -153,14 +153,14 @@ void main (void)
                     case ZL:
                     // 左側にあるラインから離れている ( |/ ) -> 少し左に曲がる
                     case L:
-                        turn_left(6, 10);
+                        turn_left(8, 10);
                         break;
 
                     // 右側にライン -> 右に曲がる
                     case ZR:
                     // 右側にあるラインから離れている ( \| ) -> 少し右に曲がる
                     case R:
-                        turn_right(6, 10);
+                        turn_right(8, 10);
                         break;
 
                     // スタートの可能性がある -> 直進
