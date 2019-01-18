@@ -3,6 +3,10 @@
 <img src="https://github.com/Mokuichi147/ProjectWork/blob/master/line_trace_car.png" width="300">
 
 プロジェクトワークのライントレースプログラムです。  
+動作時の映像は[こちら](https://www.youtube.com/watch?v=5BBmBAYvbZU)から見れます。(Overnight.c)
+
+## License
+
 このコードを使用する際は、プログラムのコードに以下のような記述をしてください。
 
 ---
