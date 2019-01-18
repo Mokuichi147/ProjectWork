@@ -15,6 +15,7 @@ https://opensource.org/licenses/mit-license.php
 - モーター 2個
 - 光センサ 4個
 - サーボモータ無
+- アルカリ単三電池 4個 (およそ5.7V)
 
 ## 機体について
 
